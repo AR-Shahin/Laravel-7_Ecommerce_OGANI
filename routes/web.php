@@ -21,7 +21,6 @@ Route::get('madmin', function () {
 Route::get('/','ClientController@index')->name('home');
 Route::get('/shop','ClientController@shop')->name('shop');
 Route::get('/single_product/{slug}','ClientController@singleProduct')->name('singleProduct');
-Route::get('/cart','ClientController@cart')->name('cart');
 Route::get('/checkout','ClientController@checkout')->name('checkout');
 Route::get('/category.product/{catName}','ClientController@catWiseProduct')->name('category.product');
 
@@ -48,3 +47,17 @@ Route::get('statusInActive/{id}','backend\ProductController@statusInActive');
 Route::get('products.delete/{id}','backend\ProductController@destroy');
 Route::get('products.edit/{id}','backend\ProductController@edit');
 Route::post('products.update/{id}','backend\ProductController@update');
+
+//Coupons Routes
+Route::get('coupons.index','backend\CouponController@index');
+Route::post('coupons','backend\CouponController@store')->name('coupons.store');
+Route::post('coupons.update/{id}','backend\CouponController@update');
+Route::get('coupons.delete/{id}','backend\CouponController@destroy');
+Route::get('couponstatusActive/{id}','backend\CouponController@statusActive');
+Route::get('couponstatusInActive/{id}','backend\CouponController@statusInActive');
+
+//Carts Routes
+Route::post('addToCart/{id}','CartController@addToCart');
+Route::get('/cart','CartController@ViewCart')->name('cart');
+Route::get('cart/delete/{id}','CartController@delete');
+Route::post('cart/update/{id}','CartController@CartUpdate');

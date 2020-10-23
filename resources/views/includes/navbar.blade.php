@@ -62,16 +62,34 @@
             </div>
             <div class="col-lg-3">
                 <div class="header__cart">
+                    @php
+                        $total = App\Models\Cart::all()->where('user_ip',request()->ip())->sum(function($sum){
+                            return $sum->price* $sum->qty;
+                        });
+                        $qty = App\Models\Cart::all()->where('user_ip',request()->ip())->sum('qty');
+                    @endphp
                     <ul>
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $qty }}</span></a></li>
                     </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">Total: <span>${{ $total }}</span></div>
                 </div>
             </div>
         </div>
         <div class="humberger__open">
             <i class="fa fa-bars"></i>
         </div>
+
+        @if(session('Cart_insert'))
+        <div class="alert alert-success" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="d-flex align-items-center justify-content-center">
+            <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+            <span><strong>Success!</strong> {{ session('Cart_insert') }}</span>
+          </div><!-- d-flex -->
+        </div>
+       @endif
     </div>
 </header>

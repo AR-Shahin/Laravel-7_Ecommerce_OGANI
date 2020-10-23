@@ -104,7 +104,15 @@
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="{{ url('single_product').'/'.$cat_pro->slug }}"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li>
+                                    <form action="{{ url('addToCart').'/'.$cat_pro->id }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="price" value="{{ $cat_pro->price }}">
+                                    <input type="hidden" name="image" value="{{ $cat_pro->main_image }}">
+                                    <input type="hidden" name="product_name" value="{{ $cat_pro->product_name }}">
+                                    <button style="background: transparent;border:none"><a><i class="fa fa-shopping-cart"></i></a></button>      
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                         <div class="featured__item__text">

@@ -201,7 +201,15 @@
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="{{ url('single_product').'/'.$s->slug }}"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li>
+                                                    <form action="{{ url('addToCart').'/'.$s->id }}" method="POST">
+                                                    @csrf
+                                                       <input type="hidden" name="image" value="{{ $s->main_image }}">
+                                    <input type="hidden" name="product_name" value="{{ $s->product_name }}">
+                                                    <input type="hidden" name="price" value="{{ $s->price }}">
+                                                    <button style="background: transparent;border:none"><a><i class="fa fa-shopping-cart"></i></a></button>      
+                                                    </form>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">
@@ -247,7 +255,15 @@
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="{{ url('single_product').'/'.$product->slug }}"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <form action="{{ url('addToCart').'/'.$product->id }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="image" value="{{ $product->main_image }}">
+                                    <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button style="background: transparent;border:none"><a><i class="fa fa-shopping-cart"></i></a></button>      
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

@@ -78,9 +78,7 @@ class ClientController extends Controller
                                 ->paginate(9);
         return view('frontend.cat_wise_product',compact('data'));
     }
-    public function cart(){
-        return view('frontend.cart');
-    }
+   
     public function checkout(){
         return view('frontend.chekout');
     }

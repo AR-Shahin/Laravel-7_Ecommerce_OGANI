@@ -11,7 +11,6 @@ use App\Models\SliderImage;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
-
 class ProductController extends Controller
 {
     /**
@@ -89,7 +88,7 @@ class ProductController extends Controller
                 $sImg->images = $last_img ;
                $sImg->save();
             }
-return redirect()->back()->with('insert','Product Added Successfully!');
+        return redirect()->back()->with('insert','Product Added Successfully!');
         }
 
     }

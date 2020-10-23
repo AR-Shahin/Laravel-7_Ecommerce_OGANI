@@ -59,14 +59,16 @@
                         <div class="product__details__price">${{ $data['product']->price  }}</div>
                         <p>{{ $data['product']->short_des  }}</p>
                         @if($data['product']->quantity != 0)
-                        <div class="product__details__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#" class="primary-btn" >ADD TO CARD</a>
+                        
+                            <form action="{{ url('addToCart').'/'.$data['product']->id }}" method="POST" style="display: inline-block">
+                            @csrf
+                            <input type="hidden" name="image" value="{{ $data['product']->main_image }}">
+                             <input type="hidden" name="product_name" value="{{ $data['product']->product_name }}">
+                            <input type="hidden" name="price" value="{{ $data['product']->price }}">
+                            <button style="background: transparent;border:none"> <a  class="primary-btn" >ADD TO CARD</a></button>      
+                            </form>
+                        
+                       
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                          @endif
                         <ul>
@@ -185,7 +187,15 @@
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="{{ url('single_product').'/'.$related->slug }}"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li>
+                                    <form action="{{ url('addToCart').'/'.$related->id }}" method="POST">
+                                    @csrf
+                                       <input type="hidden" name="image" value="{{ $related->main_image }}">
+                                    <input type="hidden" name="product_name" value="{{ $related->product_name }}">
+                                    <input type="hidden" name="price" value="{{ $related->price }}">
+                                    <button style="background: transparent;border:none"><a><i class="fa fa-shopping-cart"></i></a></button>      
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                         <div class="product__item__text">

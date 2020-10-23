@@ -10,9 +10,9 @@
 
      <label class="sidebar-label">Navigation</label>
      <div class="sl-sideleft-menu">
-       <a href="{{ route('dashboard') }}" class="sl-menu-link">
+       <a href="{{ route('dashboard') }}" class="sl-menu-link {{ request()->is('admin') ? 'active' : '' }}">
          <div class="sl-menu-item">
-           <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+           <i class="menu-item-icon icon ion-home tx-22"></i>
            <span class="menu-item-label">Dashboard</span>
          </div><!-- menu-item -->
        </a><!-- sl-menu-link -->
@@ -22,29 +22,34 @@
           <span class="menu-item-label">Visit Site</span>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-       <a href="{{ route('categories.index') }}" class="sl-menu-link">
+       <a href="{{ route('categories.index') }}" class="sl-menu-link {{ request()->is('categories') ? 'active' : '' }}">
          <div class="sl-menu-item">
-           <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+           <i class="menu-item-icon icon fa fa-tags tx-20"></i>
            <span class="menu-item-label">Categories</span>
          </div><!-- menu-item -->
        </a><!-- sl-menu-link -->
-       <a href="{{ route('brands.index') }}" class="sl-menu-link">
+       <a href="{{ route('brands.index') }}" class="sl-menu-link {{ request()->is('brands') ? 'active' : '' }}">
         <div class="sl-menu-item">
-          <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+          <i class="menu-item-icon icon fa fa-leaf tx-20"></i>
           <span class="menu-item-label">Brands</span>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-       <a href="#" class="sl-menu-link">
+       <a href="#" class="sl-menu-link {{ request()->is('products') ? 'active' : '' }} {{ request()->is('products') ? 'show-sub' : '' }} {{ request()->is('products/create') ? 'active' : '' }}">
          <div class="sl-menu-item">
-           <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+           <i class="menu-item-icon fa fa-cube tx-20"></i>
            <span class="menu-item-label">Products</span>
            <i class="menu-item-arrow fa fa-angle-down"></i>
          </div><!-- menu-item -->
        </a><!-- sl-menu-link -->
        <ul class="sl-menu-sub nav flex-column">
-         <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link">Manage Products</a></li>
-         <li class="nav-item"><a href="chart-flot.html" class="nav-link">Manage Products</a></li>
+         <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link active {{ request()->is('products') ? 'active' : '' }}">Manage Products</a></li>
        </ul>
+       <a href="{{ url('coupons.index') }}" class="sl-menu-link {{ request()->is('coupons.index') ? 'active' : '' }}">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon icon fa fa-clock-o  tx-22"></i>
+          <span class="menu-item-label">Coupons</span>
+        </div><!-- menu-item -->
+      </a><!-- sl-menu-link -->
        <a href="#" class="sl-menu-link">
          <div class="sl-menu-item">
            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
