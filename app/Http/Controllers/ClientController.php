@@ -21,11 +21,13 @@ class ClientController extends Controller
                                         ->take(3)
                                         ->latest()
                                         ->get();
-        $data['top_products'] = Product::where('count','>=','15')
+        $max = $data['max'] = Product::max('count');
+          $low = $max -5;
+        $data['top_products'] = Product::whereBetween('count', [$low, $max])
                                         //->max('count')
                                         ->where('status',1)
                                         ->take(3)
-                                        ->inRandomOrder()                                     
+                                        ->inRandomOrder()
                                         ->get();
         return view('frontend.home',compact('data'));
     }
@@ -66,7 +68,7 @@ class ClientController extends Controller
     public function catWiseProduct($catName)
     {
        $all = Category::where('cat_name',$catName)->first();
-        $cid = $all->id; 
+        $cid = $all->id;
         $data =[];
         $data['cats'] = Category::orderBy('id','desc')->get();
         $data['catName'] = $catName;
