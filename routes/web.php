@@ -29,6 +29,7 @@ Route::post('addToCart/{id}','CartController@addToCart');
 Route::get('/cart','CartController@ViewCart')->name('cart');
 Route::get('cart/delete/{id}','CartController@delete');
 Route::post('cart/update/{id}','CartController@CartUpdate');
+Route::post('applycoupon','CartController@ApplyCoupon');
 
 
 //Admin Routes

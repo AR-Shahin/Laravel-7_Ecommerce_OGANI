@@ -91,5 +91,17 @@
           </div><!-- d-flex -->
         </div>
        @endif
+       
+       @if(session('warning'))
+       <div class="alert alert-warning" role="alert">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">×</span>
+         </button>
+         <div class="d-flex align-items-center justify-content-center">
+           <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+           <span> {{ session('warning') }}</span>
+         </div><!-- d-flex -->
+       </div>
+      @endif
     </div>
 </header>

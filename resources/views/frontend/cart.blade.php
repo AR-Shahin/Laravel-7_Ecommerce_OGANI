@@ -91,23 +91,39 @@
                         <a href="{{ url('/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                     </div>
                 </div>
+               
                 <div class="col-lg-6">
+                    @if(session()->has('coupon'))
+                    @else
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
+                            <form action="{{ url('applycoupon') }}" method="post">
+                                @csrf
+                                <input type="text" placeholder="Enter your coupon code" name="coupon_name">
                                 <button type="submit" class="site-btn">APPLY COUPON</button>
                             </form>
                         </div>
                     </div>
+                    @endif
                 </div>
+             
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
+                            @if(session()->has('coupon'))
                             <li>Subtotal <span>${{$data['subTotal']}}</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Discount <span>({{ session()->get('coupon')['discount']}}%)- $
+{{$discount = (session()->get('coupon')['discount'] *$data['subTotal'])/100  }}
+                            </span></li>
+                            <li>Total <span>${{$data['subTotal'] - $discount}}</span></li>
+                                @else
+                                <li>Subtotal <span>${{$data['subTotal']}}</span></li>
+                                <li>Total <span>${{$data['subTotal']}}</span></li>
+                            @endif
+                           
+                           
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

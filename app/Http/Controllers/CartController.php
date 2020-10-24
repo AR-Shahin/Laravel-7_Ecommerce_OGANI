@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Cart;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -53,10 +55,22 @@ class CartController extends Controller
 }
     public function delete($id)
     {
-        
         $delete = Cart::where('id',$id)->where('user_ip',request()->ip())->delete();
         if($delete){
             return Redirect()->back()->with("Cart_insert",'Product Deleted Successfully!!');
+        }
+    }
+
+    public function ApplyCoupon(Request $request){
+        $check = Coupon::where('coupon_name',$request->coupon_name)->first();
+        if($check){
+            Session::flash('coupon',[
+                'coupon_name' => $check->coupon_name,
+                'discount' => $check->discount,
+            ]);
+            return Redirect()->back()->with("Cart_insert",'Coupon Added Successfully!!');
+        }else{
+            return Redirect()->back()->with("warning",'Invaild Coupon!');
         }
     }
 }
