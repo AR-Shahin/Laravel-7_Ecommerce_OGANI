@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('madmin', function () {
-    return view('layouts.backmaster');
+Route::get('ars', function () {
+    return view('backend.admin.login');
 });
 
 //Client Routes
@@ -24,16 +24,27 @@ Route::get('/single_product/{slug}','ClientController@singleProduct')->name('sin
 Route::get('/checkout','ClientController@checkout')->name('checkout');
 Route::get('/category.product/{catName}','ClientController@catWiseProduct')->name('category.product');
 
+//Carts Routes
+Route::post('addToCart/{id}','CartController@addToCart');
+Route::get('/cart','CartController@ViewCart')->name('cart');
+Route::get('cart/delete/{id}','CartController@delete');
+Route::post('cart/update/{id}','CartController@CartUpdate');
+
 
 //Admin Routes
-Route::get('admin','backend\AdminController@index')->name('dashboard');
+Route::get('admin','backend\AdminController@index')->name('dashboard')->middleware('auth');
+Route::get('e-admin','backend\AdminController@login')->name('e-admin');
+Route::get('e-registraion','backend\AdminController@registraion')->name('e-registraion');
+Route::post('admin.store','backend\AdminController@store');
+Route::post('admin.login','backend\AdminController@LoginProcess');
+Route::get('admin.logout','backend\AdminController@logout')->middleware('auth');
 
 //Category Routes
 Route::get('categories','backend\CategoryController@index')->name('categories.index');
 Route::post('categories','backend\CategoryController@store')->name('categories.store');
 Route::post('categories.update/{id}','backend\CategoryController@update');
-Route::get('categories.delete/{id}','backend\CategoryController@destroy');
-
+Route::get('categories.delete/{id}','backend\CategoryController@destroy'); 
+   
 //Brand Routes
 Route::get('brands','backend\BrandController@index')->name('brands.index');
 Route::post('brands','backend\BrandController@store')->name('brands.store');
@@ -56,8 +67,5 @@ Route::get('coupons.delete/{id}','backend\CouponController@destroy');
 Route::get('couponstatusActive/{id}','backend\CouponController@statusActive');
 Route::get('couponstatusInActive/{id}','backend\CouponController@statusInActive');
 
-//Carts Routes
-Route::post('addToCart/{id}','CartController@addToCart');
-Route::get('/cart','CartController@ViewCart')->name('cart');
-Route::get('cart/delete/{id}','CartController@delete');
-Route::post('cart/update/{id}','CartController@CartUpdate');
+
+
