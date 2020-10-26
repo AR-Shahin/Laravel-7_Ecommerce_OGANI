@@ -64,7 +64,7 @@ class CartController extends Controller
     public function ApplyCoupon(Request $request){
         $check = Coupon::where('coupon_name',$request->coupon_name)->first();
         if($check){
-            Session::flash('coupon',[
+            Session::put('coupon',[
                 'coupon_name' => $check->coupon_name,
                 'discount' => $check->discount,
             ]);
@@ -72,6 +72,12 @@ class CartController extends Controller
         }else{
             return Redirect()->back()->with("warning",'Invaild Coupon!');
         }
+    }
+
+     public function DestroyCoupon()
+    {
+        session()->forget('coupon');
+        return Redirect()->back()->with("Cart_insert",'Coupon Has Deleted!!');
     }
 }
             

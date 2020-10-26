@@ -69,7 +69,7 @@
                                             <button class="btn  btn-info" style="display:inline-block">Update</button>
                                            </form>
                                         </div>
-                                        
+
                                     </td>
                                     <td class="shoping__cart__total">
                                         ${{ $cart->qty*$cart->price }}
@@ -91,7 +91,7 @@
                         <a href="{{ url('/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                     </div>
                 </div>
-               
+
                 <div class="col-lg-6">
                     @if(session()->has('coupon'))
                     @else
@@ -107,13 +107,23 @@
                     </div>
                     @endif
                 </div>
-             
+
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
                             @if(session()->has('coupon'))
                             <li>Subtotal <span>${{$data['subTotal']}}</span></li>
+                            <li>
+                                <div class="row">
+                                    <div class ="col-6">
+                                        Coupon Name : <span> {{ session()->get('coupon')['coupon_name']}}%)</span>
+                                    </div>
+                                    <div class ="col-6 text-right">
+                                        <a href ="{{  url('destroy.coupon') }}" onclick="return confirm('Are you sure ?')" class="btn btn-danger ">Remove Coupon</a>
+                                    </div>
+                                </div>
+                            </li>
                             <li>Discount <span>({{ session()->get('coupon')['discount']}}%)- $
 {{$discount = (session()->get('coupon')['discount'] *$data['subTotal'])/100  }}
                             </span></li>
@@ -122,18 +132,19 @@
                                 <li>Subtotal <span>${{$data['subTotal']}}</span></li>
                                 <li>Total <span>${{$data['subTotal']}}</span></li>
                             @endif
-                           
-                           
+
+
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="{{ url('checkout.index') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     @endif
-  
+
     <!-- Shoping Cart Section End -->
 
 
 @endsection
+

@@ -30,6 +30,7 @@ Route::get('/cart','CartController@ViewCart')->name('cart');
 Route::get('cart/delete/{id}','CartController@delete');
 Route::post('cart/update/{id}','CartController@CartUpdate');
 Route::post('applycoupon','CartController@ApplyCoupon');
+Route::get('destroy.coupon','CartController@DestroyCoupon');
 
 
 //Admin Routes
@@ -44,8 +45,8 @@ Route::get('admin.logout','backend\AdminController@logout')->middleware('auth');
 Route::get('categories','backend\CategoryController@index')->name('categories.index');
 Route::post('categories','backend\CategoryController@store')->name('categories.store');
 Route::post('categories.update/{id}','backend\CategoryController@update');
-Route::get('categories.delete/{id}','backend\CategoryController@destroy'); 
-   
+Route::get('categories.delete/{id}','backend\CategoryController@destroy');
+
 //Brand Routes
 Route::get('brands','backend\BrandController@index')->name('brands.index');
 Route::post('brands','backend\BrandController@store')->name('brands.store');
@@ -67,6 +68,24 @@ Route::post('coupons.update/{id}','backend\CouponController@update');
 Route::get('coupons.delete/{id}','backend\CouponController@destroy');
 Route::get('couponstatusActive/{id}','backend\CouponController@statusActive');
 Route::get('couponstatusInActive/{id}','backend\CouponController@statusInActive');
+
+//Order Routes
+Route::get('order.index','OrderController@index');
+Route::get('checkout.index','OrderController@checkout');
+Route::post('order.confirm','OrderController@ConfirmOrder');
+Route::get('manageorder.index','OrderController@ManageOrder');
+
+
+
+
+
+
+//Customer Routes
+Route::get('customer.login','CustomerController@loginPage');
+Route::get('customer.registration','CustomerController@regPage');
+Route::post('customer.store','CustomerController@store');
+Route::post('customer.login','CustomerController@Login');
+Route::get('customer.home','CustomerController@index');
 
 
 
