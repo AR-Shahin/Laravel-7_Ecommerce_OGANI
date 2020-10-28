@@ -1,5 +1,5 @@
 @extends('layouts.backmaster')
-@section('title', 'Category')
+@section('title', 'Order')
 @section('css_files')
 <link href="{{ asset('backend') }}/lib/highlightjs/github.css" rel="stylesheet">
 <link href="{{ asset('backend') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 {{--main content  --}}
 @section('main_content')
 <div class="row no-gutters">
-  <div class="col-12 col-md-8">
+  <div class="col-12 col-md-12">
    <div class="card">
      <div class="card-body">
       <h3 class="mb-3">Manage Orders</h3>
@@ -27,13 +27,47 @@
           <thead>
             <tr>
               <th class="wd-15p">SL</th>
-              <th class="wd-15p">Category name</th>
-              <th class="wd-15p">Image</th>
+              <th class="wd-15p">Product name</th>
+              <th class="wd-15p">Qtuantity</th>
+              <th class="wd-20p">Price</th>
               <th class="wd-20p">Status</th>
               <th class="wd-15p">Added date</th>
               <th class="wd-10p">Actions</th>
             </tr>
           </thead>
+          <tbody>
+              @php
+                  $i=1;
+              @endphp
+              @foreach($data['orders'] as $order)
+              <tr>
+                <td>{{ $i++ }}</td>
+                <td>{{ $order->product->product_name }}</td>
+                <td>{{ $order->qty }}</td>
+                <td>{{ $order->product->price  }}</td>
+                <td>
+                    @if($order->status == 0)
+                        <span class="badge badge-warning">New</span>
+                    @elseif($order->status == 1)
+                        <span class="badge badge-info">Shifted</span>
+                        @elseif($order->status == 4)
+                        <span class="badge badge-success">Received</span>
+                    @endif
+                </td>
+                <td>{{ $order->created_at->diffForHumans() }}</td>
+                <td>
+                  @if($order->status == 0)
+                  <a href="{{ url('shiftedOrder').'/'.$order->id }}" class="btn btn-info">Shift</a>
+                    @elseif($order->status == 1)
+                    <a href="{{ url('trashdOrder').'/'.$order->id }}" class="btn btn-danger">Trash</a>
+
+                    @endif
+
+                </td>
+            </tr>
+              @endforeach
+
+          </tbody>
         </table>
 
       </div><!-- table-wrapper -->
@@ -43,47 +77,7 @@
 
 </div>
 @endsection
-{{-- Edit modal --}}
-@foreach($categories as $cat)
-<div id="editModal_{{ $cat->id }}" class="modal fade">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content bd-0 tx-14">
-      <div class="modal-header pd-x-20">
-        <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Edit Category</h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body pd-20">
-        <form action="{{ url('categories.update/'.$cat->id) }}" method="POST" method="POST" enctype="multipart/form-data">
-          @csrf
-          <input type="hidden"  value="{{ $cat->cat_img }}" name="old_img">
-          <label for="">Category Name : </label>
-         <div class="input-group">
-           <span class="input-group-addon"><i class="fa fa-tags tx-16 lh-0 op-6"></i></span>
-           <input type="text" class="form-control @error('cat_name') is-invalid @enderror" value="{{ $cat->cat_name }}" name="cat_name">
-         </div>
-         @error('cat_name')
-         <span class="text-danger">{{ $message  }}</span>
-         @enderror
-         <label for="">Category Image : </label>
-         <div class="input-group">
-           <span class="input-group-addon"><i class="fa fa-image tx-16 lh-0 op-6"></i></span>
-           <input type="file" class="form-control @error('cat_img') is-invalid @enderror"  value="{{ old('cat_img') }}" name="cat_img">
-           <img src="{{ asset($cat->cat_img) }}" alt="" width="60px">
-         </div>
-         @error('cat_img')
-         <span class="text-danger">{{ $message  }}</span>
-         @enderror
-         <div class="form-group mt-3">
-           <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-pencil-square mr-1"></i> Update Category</button>
-         </div>
-        </form>
-      </div>
-    </div>
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
-@endforeach
+
 @section('scripts')
 <script src="{{ asset('backend') }}/lib/highlightjs/highlight.pack.js"></script>
 <script src="{{ asset('backend') }}/lib/datatables/jquery.dataTables.js"></script>

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Product;
+use App\Customer;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -13,6 +14,6 @@ class Order extends Model
  public function product()
     {
         return $this->belongsTo(Product::class);
-    }
+    }   
 }
  	 	 	 	 	

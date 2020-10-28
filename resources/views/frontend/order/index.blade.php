@@ -17,8 +17,7 @@
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
                         <th scope="col">Total Price</th>
-                        <th scope="col">Staus</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Status</th>
                       </tr>
                     </thead>
                         <tbody>
@@ -42,12 +41,9 @@
                                     <span class="badge badge-link">N/A</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="" class="btn btn-danger">Delete</a>
-                                </td>
                             </tr>
                             @endforeach
-                          
+
                         </tbody>
                   </table>
             </div>

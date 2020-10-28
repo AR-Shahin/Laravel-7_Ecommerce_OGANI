@@ -73,7 +73,9 @@ Route::get('couponstatusInActive/{id}','backend\CouponController@statusInActive'
 Route::get('order.index','OrderController@index');
 Route::get('checkout.index','OrderController@checkout');
 Route::post('order.confirm','OrderController@ConfirmOrder');
-Route::get('manageorder.index','OrderController@ManageOrder');
+Route::get('manageorder.index','OrderController@ManageOrder')->middleware('auth');
+Route::get('shiftedOrder/{id}','OrderController@ShiftedOrder')->middleware('auth');
+Route::get('trashdOrder/{id}','OrderController@trashdOrder')->middleware('auth');
 
 
 

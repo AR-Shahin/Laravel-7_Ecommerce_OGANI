@@ -46,10 +46,10 @@ class OrderController extends Controller
             $or->qty = $cart->qty;
             $or->price = $cart->price;
             $or->coupon_name = $cpnnm ;
-            $or->save();    
+            $or->save();
         }
         foreach($cartData as $cart){
-            $cartData = Cart::where('user_ip',$request->ip())->delete();  
+            $cartData = Cart::where('user_ip',$request->ip())->delete();
         }
         if(session()->has('coupon')){
             session()->forget('coupon');
@@ -58,5 +58,30 @@ class OrderController extends Controller
      }
         //return view('frontend.order.checkout');
     }
-    
-}	
+
+
+    public function ManageOrder(){
+        $data = [];
+        $data['orders'] = Order::latest()->get();
+        return view('backend.order.index',compact('data'));
+    }
+
+    public function ShiftedOrder($id){
+        $update = Order::find($id)->update([
+            "status" =>1,
+        ]);
+        if($update){
+            return redirect()->back()->with('success','Shifted Order!');
+        }
+    }
+    public function trashdOrder($id){
+        $update = Order::find($id)->update([
+            "status" =>4,
+        ]);
+        if($update){
+            return redirect()->back()->with('success','Trashed Order!');
+        }
+    }
+
+}
+

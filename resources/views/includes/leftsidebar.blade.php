@@ -50,12 +50,12 @@
           <span class="menu-item-label">Coupons</span>
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
-       <a href="#" class="sl-menu-link">
+       <a href="#" class="sl-menu-link {{ request()->is('manageorder.index') ? 'active' : '' }}">
          <div class="sl-menu-item">
            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
            <span class="menu-item-label">Orders</span>
            <i class="menu-item-arrow fa fa-angle-down"></i>
-         </div><!-- menu-item -->
+         </div><!-- menu-item --> 
        </a><!-- sl-menu-link -->
        <ul class="sl-menu-sub nav flex-column">
          <li class="nav-item"><a href="{{ url('manageorder.index')}}" class="nav-link">Manage Order</a></li>
