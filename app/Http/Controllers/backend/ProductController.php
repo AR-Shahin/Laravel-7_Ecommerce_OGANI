@@ -84,15 +84,15 @@ class ProductController extends Controller
 
             foreach ($mulImage as $single_img){
                 $name_gen = hexdec(uniqid()) . '.' . $single_img->getClientOriginalExtension();
-        $uploads = 'images/sliders/';
-        $last_img = $uploads . $name_gen;
-        Image::make($single_img)->resize(270,270)->save($last_img);
+                $uploads = 'images/sliders/';
+                $last_img = $uploads . $name_gen;
+                Image::make($single_img)->resize(270,270)->save($last_img);
                 $sImg = new SliderImage();
                 $sImg->product_id = $id ;
                 $sImg->images = $last_img ;
-               $sImg->save();
+                $sImg->save();
             }
-        return redirect()->back()->with('insert','Product Added Successfully!');
+            return redirect()->back()->with('insert','Product Added Successfully!');
         }
 
     }
@@ -105,11 +105,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-         $id = base64_decode($id);
-         $data = array();
-         $data['product'] = Product::where('id', $id)->get();
-         $data['slider_images'] = SliderImage::where('product_id', $id)->get();
-         return view('backend.product.singleProduct',compact('data'));
+        $id = base64_decode($id);
+        $data = array();
+        $data['product'] = Product::where('id', $id)->get();
+        $data['slider_images'] = SliderImage::where('product_id', $id)->get();
+        return view('backend.product.singleProduct',compact('data'));
 
     }
 
@@ -153,10 +153,10 @@ class ProductController extends Controller
         $slider_images = $request->file('slider_images');
         if($main_image && $slider_images){
             $old_img = $request->old_img;
-        $name_gen = hexdec(uniqid()) . '.' . $main_image->getClientOriginalExtension();
-        $uploads = 'images/product/';
-        $last_img = $uploads . $name_gen;
-        Image::make($main_image)->resize(270,270)->save($last_img);
+            $name_gen = hexdec(uniqid()) . '.' . $main_image->getClientOriginalExtension();
+            $uploads = 'images/product/';
+            $last_img = $uploads . $name_gen;
+            Image::make($main_image)->resize(270,270)->save($last_img);
             $up = Product::find($id);
             $up->product_name = $request->product_name;
             $up->cat_id = $request->cat_id;
@@ -186,7 +186,7 @@ class ProductController extends Controller
                     $sImg = new SliderImage();
                     $sImg->product_id = $id ;
                     $sImg->images = $last_img ;
-                   $sImg->save();
+                    $sImg->save();
                 }
                 return redirect('products')->with('update','Product Updated Successfully!');
             }
@@ -196,21 +196,21 @@ class ProductController extends Controller
             $uploads = 'images/product/';
             $last_img = $uploads . $name_gen;
             Image::make($main_image)->resize(270,270)->save($last_img);
-                $up = Product::find($id);
-                $up->product_name = $request->product_name;
-                $up->cat_id = $request->cat_id;
-                $up->brand_id = $request->brand_id;
-                $up->price = $request->price;
-                $up->quantity = $request->quantity;
-                $up->short_des = $request->short_des;
-                $up->long_des = $request->short_des;
-                $up->main_image = $last_img;
-                $up->updated_at = Carbon::now();
-                $up->slug =  Str::slug($request->product_name, '-');
-                if($up->save()){
-                    unlink($old_img);
-                    return redirect('products')->with('update','Product Updated Successfully!'); 
-                }
+            $up = Product::find($id);
+            $up->product_name = $request->product_name;
+            $up->cat_id = $request->cat_id;
+            $up->brand_id = $request->brand_id;
+            $up->price = $request->price;
+            $up->quantity = $request->quantity;
+            $up->short_des = $request->short_des;
+            $up->long_des = $request->short_des;
+            $up->main_image = $last_img;
+            $up->updated_at = Carbon::now();
+            $up->slug =  Str::slug($request->product_name, '-');
+            if($up->save()){
+                unlink($old_img);
+                return redirect('products')->with('update','Product Updated Successfully!'); 
+            }
         }else if($slider_images){
             $up = Product::find($id);
             $up->product_name = $request->product_name;
@@ -238,7 +238,7 @@ class ProductController extends Controller
                     $sImg = new SliderImage();
                     $sImg->product_id = $id ;
                     $sImg->images = $last_img ;
-                   $sImg->save();
+                    $sImg->save();
                 }
                 return redirect('products')->with('update','Product Updated Successfully!');
             }
@@ -258,7 +258,7 @@ class ProductController extends Controller
                 return redirect('products')->with('update','Product Updated Successfully!');
             }
         }
-   
+
     }
 
     /**
@@ -271,19 +271,19 @@ class ProductController extends Controller
     {
         $oldData =  Product::findorFail($id);
         $oldImg = $oldData->main_image;
-         $SliderImages = SliderImage::where('product_id',$id)->get();
-         $delete = Product::findorFail($id)->delete();
-         if($delete){
-             unlink($oldImg);
-             foreach ($SliderImages as $s){
-                 unlink($s->images);
-                 SliderImage::findorFail($s->id)->delete();
-             }
-             return redirect()->back()->with('delete','Product Deleted Successfully!');
-         }
+        $SliderImages = SliderImage::where('product_id',$id)->get();
+        $delete = Product::findorFail($id)->delete();
+        if($delete){
+            unlink($oldImg);
+            foreach ($SliderImages as $s){
+                unlink($s->images);
+                SliderImage::findorFail($s->id)->delete();
+            }
+            return redirect()->back()->with('delete','Product Deleted Successfully!');
+        }
     }
 
-     public function statusActive($id)
+    public function statusActive($id)
     {
         $up = Product::findorFail($id)->update([
             "status" => 1

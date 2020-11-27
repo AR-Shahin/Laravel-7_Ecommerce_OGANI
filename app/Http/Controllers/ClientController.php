@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Cart;
 use App\Models\SliderImage;
+use App\Models\Slider;
 
 class ClientController extends Controller
 {
@@ -29,6 +31,8 @@ class ClientController extends Controller
                                         ->take(3)
                                         ->inRandomOrder()
                                         ->get();
+        $data['cartProduct'] = Cart::count('id');
+        $data['sliders'] = Slider::latest()->get();
         return view('frontend.home',compact('data'));
     }
     public function shop(){

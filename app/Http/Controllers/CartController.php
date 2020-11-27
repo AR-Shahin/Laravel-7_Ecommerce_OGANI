@@ -13,6 +13,11 @@ class CartController extends Controller
 {
     public function addToCart(Request $request ,$pid)
     {
+        if($request->expid){
+            echo 'extra';
+        }else{
+            echo 'single';
+        }
         $chk = Cart::where('product_id',$pid)->where('user_ip',request()->ip())->first();
         if($chk){
             Cart::where('product_id',$pid)->increment('qty');

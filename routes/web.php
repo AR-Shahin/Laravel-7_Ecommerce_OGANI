@@ -78,8 +78,14 @@ Route::get('shiftedOrder/{id}','OrderController@ShiftedOrder')->middleware('auth
 Route::get('trashdOrder/{id}','OrderController@trashdOrder')->middleware('auth');
 
 
+//Slider Routes
+Route::prefix('slider')->group(function () {
+    Route::get('index','backend\SliderController@index')->name('slider.index');
+    Route::post('store','backend\SliderController@store')->name('slider.store');
+    Route::post('update/{id}','backend\SliderController@update')->name('slider.update');
+    Route::get('delete/{id}','backend\SliderController@delete')->name('slider.delete');
 
-
+});
 
 
 //Customer Routes

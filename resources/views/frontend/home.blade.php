@@ -14,7 +14,7 @@
                         </div>
                         <ul>
                             @foreach($data['cats'] as $cat)
-                            <li><a href="{{ url('category.product').'/'.$cat->cat_name }}">{{ ucwords($cat->cat_name)}}</a></li>
+                                <li><a href="{{ url('category.product').'/'.$cat->cat_name }}">{{ ucwords($cat->cat_name)}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -41,18 +41,47 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{{ asset('frontend') }}/img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="{{ url('shop')}}" class="primary-btn">SHOP NOW</a>
+
+                    <div class="slider hero_slider owl-carousel ">
+                        @foreach($data['sliders'] as $slider)
+                        <div class="hero__item set-bg" data-setbg="{{ asset($slider->image) }}">
+                            <div class="hero__text bg-light p-4">
+                                <span>{{$slider->text_1}}</span>
+                                <h2>{{$slider->text_2}}</h2>
+                                <h2>{{$slider->text_3}}</h2>
+                                <p>{{$slider->text_4}}</p>
+                                <a href="{{ url('shop')}}" class="primary-btn">SHOP NOW</a>
+                            </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>
     </section>
+
+    <style>
+        .hero_slider{
+            background: #7fad39;
+        }
+        .hero_slider.owl-carousel .owl-nav button {
+            font-size: 18px;
+            color: #1c1c1c;
+            height: 70px;
+            width: 30px;
+            line-height: 70px;
+            text-align: center;
+            border: 1px solid #ebebeb;
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            -webkit-transform: translateY(-35px);
+            background: #ffffff;
+        }
+        .hero_slider.owl-carousel .owl-nav button.owl-next {
+            left: auto;
+            right: -35px;
+        }
+    </style>
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->
@@ -61,12 +90,12 @@
             <div class="row">
                 <div class="categories__slider owl-carousel">
                     @foreach($data['cats'] as $cat)
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset($cat->cat_img) }}">
-                            <h5><a href="{{ url('category.product').'/'.$cat->cat_name }}"> {{ $cat->cat_name }}</a></h5>
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg" data-setbg="{{ asset($cat->cat_img) }}">
+                                <h5><a href="{{ url('category.product').'/'.$cat->cat_name }}"> {{ $cat->cat_name }}</a></h5>
+                            </div>
                         </div>
-                    </div>
-                 @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -84,45 +113,50 @@
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                             @foreach($data['cats'] as $cat)
-                             <li data-filter=".filter-{{ $cat->id}}">{{ ucwords($cat->cat_name)}}</li>
-                             @endforeach
-                          {{--  <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li> 
-                            --}}
+                            @foreach($data['cats'] as $cat)
+                                <li data-filter=".filter-{{ $cat->id}}">{{ ucwords($cat->cat_name)}}</li>
+                            @endforeach
+                            {{--  <li data-filter=".oranges">Oranges</li>
+                              <li data-filter=".fresh-meat">Fresh Meat</li>
+                              <li data-filter=".vegetables">Vegetables</li>
+                              <li data-filter=".fastfood">Fastfood</li>
+                              --}}
                         </ul>
                     </div>
                 </div>
             </div>
+            {{--{{ $data['cartProduct']}}--}}
             <div class="row featured__filter">
-@foreach($data['catwise_products']  as $cat_pro)
-    <div class="col-lg-3 col-md-4 col-sm-6 mix filter-{{ $cat_pro->category->id }} fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{ asset($cat_pro->main_image) }}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="{{ url('single_product').'/'.$cat_pro->slug }}"><i class="fa fa-retweet"></i></a></li>
-                                <li>
-                                    <form action="{{ url('addToCart').'/'.$cat_pro->id }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="price" value="{{ $cat_pro->price }}">
-                                    <input type="hidden" name="image" value="{{ $cat_pro->main_image }}">
-                                    <input type="hidden" name="product_name" value="{{ $cat_pro->product_name }}">
-                                    <button style="background: transparent;border:none"><a><i class="fa fa-shopping-cart"></i></a></button>      
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{ $cat_pro->product_name}}</a></h6>
-                            <h5>${{ $cat_pro->price}}</h5>
+                @foreach($data['catwise_products']  as $cat_pro)
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix filter-{{ $cat_pro->category->id }} fresh-meat">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="{{ asset($cat_pro->main_image) }}">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="{{ url('single_product').'/'.$cat_pro->slug }}"><i class="fa fa-retweet"></i></a></li>
+                                    <li>
+
+                                        <form action="{{ url('addToCart').'/'.$cat_pro->id }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="price" value="{{ $cat_pro->price }}">
+                                            <input type="hidden" name="image" value="{{ $cat_pro->main_image }}">
+                                            @if( $data['cartProduct'] ==0)
+                                                <input type="hidden" name="expid" value="1">
+                                            @endif
+                                            <input type="hidden" name="product_name" value="{{ $cat_pro->product_name }}">
+                                            <button style="background: transparent;border:none"><a><i class="fa fa-shopping-cart"></i></a></button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="#">{{ $cat_pro->product_name}}</a></h6>
+                                <h5>${{ $cat_pro->price}}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-@endforeach
-                
+                @endforeach
+
             </div>
         </div>
     </section>
@@ -156,19 +190,19 @@
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                            @foreach($data['latest_products'] as $l_product)
-                                <a href="{{ url('single_product').'/'.$l_product->slug }}" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset($l_product->main_image) }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ucwords($l_product->product_name)}}</h6>
-                                        <span>${{$l_product->price}}</span>
-                                    </div>
-                                </a>
-                            @endforeach
+                                @foreach($data['latest_products'] as $l_product)
+                                    <a href="{{ url('single_product').'/'.$l_product->slug }}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="{{ asset($l_product->main_image) }}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{ucwords($l_product->product_name)}}</h6>
+                                            <span>${{$l_product->price}}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
-                         
+
                         </div>
                     </div>
                 </div>
@@ -178,16 +212,16 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 @foreach($data['top_products'] as $t_product)
-                                <a href="{{ url('single_product').'/'.$t_product->slug }}" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset($t_product->main_image) }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ucwords($t_product->product_name)}}</h6>
-                                        <span>${{$t_product->price}}</span>
-                                    </div>
-                                </a>
-                            @endforeach
+                                    <a href="{{ url('single_product').'/'.$t_product->slug }}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="{{ asset($t_product->main_image) }}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{ucwords($t_product->product_name)}}</h6>
+                                            <span>${{$t_product->price}}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
