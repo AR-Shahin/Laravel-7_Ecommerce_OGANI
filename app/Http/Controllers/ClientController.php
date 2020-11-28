@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\SliderImage;
 use App\Models\Slider;
+use App\Models\SocialLink;
+use App\Models\SiteIdentity;
 
 class ClientController extends Controller
 {
@@ -33,6 +35,12 @@ class ClientController extends Controller
                                         ->get();
         $data['cartProduct'] = Cart::count('id');
         $data['sliders'] = Slider::latest()->get();
+        $data['rands'] = Product::where('status',1)
+                                ->take(3)
+                                ->inRandomOrder()
+                                ->get();
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         return view('frontend.home',compact('data'));
     }
     public function shop(){
@@ -45,6 +53,8 @@ class ClientController extends Controller
                                // ->where('quantity','>',0)
                                 ->orderBy('id', 'desc')
                                 ->paginate(12);
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         return view('frontend.shop',compact('data'));
     }
     public function singleProduct($slug){
@@ -66,11 +76,14 @@ class ClientController extends Controller
                                         ->inRandomOrder()
                                         ->take(4)
                                         ->get();
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         return view('frontend.singleProduct',compact('data'));
     }
 
     public function catWiseProduct($catName)
     {
+
        $all = Category::where('cat_name',$catName)->first();
         $cid = $all->id;
         $data =[];
@@ -80,10 +93,14 @@ class ClientController extends Controller
                                 ->where('cat_id',$cid)
                                 ->orderBy('id', 'desc')
                                 ->paginate(9);
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         return view('frontend.cat_wise_product',compact('data'));
     }
    
     public function checkout(){
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         return view('frontend.chekout');
     }
 }

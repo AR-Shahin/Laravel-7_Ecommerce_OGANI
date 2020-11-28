@@ -7,11 +7,15 @@ use App\Customer;
 use App\Models\Cart;
 use App\Order;
 
+use App\Models\SiteIdentity;
+use App\Models\SocialLink;
 class OrderController extends Controller
 {
      public function index(Request $request)
     {
          $data= [];
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
          $data['orderData'] = Order::where('user_ip', $request->ip())->where('status' ,'!=',4)->latest()->get();
         return view('frontend.order.index',compact('data'));
     }
@@ -63,6 +67,8 @@ class OrderController extends Controller
     public function ManageOrder(){
         $data = [];
         $data['orders'] = Order::latest()->get();
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         return view('backend.order.index',compact('data'));
     }
 

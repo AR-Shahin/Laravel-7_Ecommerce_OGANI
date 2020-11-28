@@ -86,7 +86,18 @@ Route::prefix('slider')->group(function () {
     Route::get('delete/{id}','backend\SliderController@delete')->name('slider.delete');
 
 });
-
+#site identity
+Route::prefix('site')->group(function (){
+    Route::get('identity','backend\WebsiteController@index')->name('site.identity');
+    Route::post('identity','backend\WebsiteController@store')->name('site.identity');
+    Route::post('update','backend\WebsiteController@update')->name('site.update');
+});
+#social links
+Route::prefix('social-link')->group(function (){
+    Route::get('index','backend\SocialLinksController@index')->name('social.index');
+    Route::post('index','backend\SocialLinksController@store')->name('social.store');
+    Route::post('update','backend\SocialLinksController@update')->name('social.update');
+});
 
 //Customer Routes
 Route::get('customer.login','CustomerController@loginPage');

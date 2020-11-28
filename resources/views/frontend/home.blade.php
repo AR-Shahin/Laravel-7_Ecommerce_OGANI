@@ -45,11 +45,11 @@
                     <div class="slider hero_slider owl-carousel ">
                         @foreach($data['sliders'] as $slider)
                         <div class="hero__item set-bg" data-setbg="{{ asset($slider->image) }}">
-                            <div class="hero__text bg-light p-4">
+                            <div class="hero__text p-4" style="background-color:rgba(242, 241, 242,.8)">
                                 <span>{{$slider->text_1}}</span>
                                 <h2>{{$slider->text_2}}</h2>
                                 <h2>{{$slider->text_3}}</h2>
-                                <p>{{$slider->text_4}}</p>
+                                <p class="text-waring">{{$slider->text_4}}</p>
                                 <a href="{{ url('shop')}}" class="primary-btn">SHOP NOW</a>
                             </div>
                         </div>
@@ -168,12 +168,12 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="{{ asset('frontend') }}/img/banner/banner-1.jpg" alt="">
+                        <img src="{{ asset('images/hero/img2 (2).jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="{{ asset('frontend') }}/img/banner/banner-2.jpg" alt="">
+                        <img src="{{ asset('images/hero/img2 (1).jpg') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -225,69 +225,24 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
+                </div>    <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>Review Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset('frontend') }}/img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset('frontend') }}/img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset('frontend') }}/img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                @foreach($data['rands'] as $l_product)
+                                    <a href="{{ url('single_product').'/'.$l_product->slug }}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="{{ asset($l_product->main_image) }}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{ucwords($l_product->product_name)}}</h6>
+                                            <span>${{$l_product->price}}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset('frontend') }}/img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset('frontend') }}/img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{ asset('frontend') }}/img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -310,7 +265,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="{{ asset('frontend') }}/img/blog/blog-1.jpg" alt="">
+                            <img src="{{ asset('images/blog/b1.jpg') }}" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
@@ -325,7 +280,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="{{ asset('frontend') }}/img/blog/blog-2.jpg" alt="">
+                            <img src="{{ asset('images/blog/b2.jpg') }}" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
@@ -340,7 +295,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="{{ asset('frontend') }}/img/blog/blog-3.jpg" alt="">
+                            <img src="{{ asset('images/blog/b1.jpg') }}" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>

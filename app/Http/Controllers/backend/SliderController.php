@@ -100,4 +100,5 @@ class SliderController extends Controller
             return Redirect()->back()->with("delete",'Slider Deleted Successfully!!');
         }
     }
+
 }

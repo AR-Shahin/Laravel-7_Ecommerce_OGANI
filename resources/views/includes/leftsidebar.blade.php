@@ -60,9 +60,20 @@
         <ul class="sl-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{ url('manageorder.index')}}" class="nav-link">Manage Order</a></li>
         </ul>
+        {{--slider--}}
+        <a href="#" class="sl-menu-link ">
+            <div class="sl-menu-item">
+                <i class="menu-item-icon fa fa-sliders tx-24"></i>
+                <span class="menu-item-label">Sliders</span>
+                <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
 
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="{{route('slider.index')}}" class="nav-link">Manage Slider</a></li>
+            </ul>
+        </a><!-- sl-menu-link -->
         {{--site--}}
-        <a href="#" class="sl-menu-link">
+        <a href="#" class="sl-menu-link {{ request()->is('site/identity') ? 'active' : '' }} {{ request()->is('social-link/index') ? 'active' : '' }} ">
             <div class="sl-menu-item">
                 <i class="menu-item-icon fa fa-globe tx-24"></i>
                 <span class="menu-item-label">Site Identity</span>
@@ -70,20 +81,8 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ url('manageorder.index')}}" class="nav-link">Logo & Footer</a></li>
-            <li class="nav-item"><a href="{{ url('manageorder.index')}}" class="nav-link">Social Links</a></li>
-        </ul>
-
-        {{--slider--}}
-        <a href="#" class="sl-menu-link">
-            <div class="sl-menu-item">
-                <i class="menu-item-icon fa fa-sliders tx-24"></i>
-                <span class="menu-item-label">Sliders</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
-            </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{route('slider.index')}}" class="nav-link">Manage Slider</a></li>
+            <li class="nav-item"><a href="{{ route('site.identity')  }}" class="nav-link">Logo & Footer</a></li>
+            <li class="nav-item"><a href="{{ route('social.index')}}" class="nav-link">Social Links</a></li>
         </ul>
 
     </div><!-- sl-sideleft-menu -->

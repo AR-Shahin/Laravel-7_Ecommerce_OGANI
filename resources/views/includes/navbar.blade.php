@@ -5,26 +5,17 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                            <li>Free Shipping for all Order of $99</li>
+                            <li><i class="fa fa-envelope"></i> {{$data['link']->email}}</li>
+                            <li>{{$data['site']->top_txt}}</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                        </div>
-                        <div class="header__top__right__auth">
-                            <div class="d-flex">
-                                <a href="{{ url('customer.login') }}" style="display: inline-block"><i class="fa fa-user"></i> Login</a>
-                                <div class="mx-2"></div>
-                                <a href="{{ url('customer.registration') }}"><i class="fa fa-user"></i> Registration</a>
-                            </div>
-                           
+                            <a href="{{$data['link']->fb}}"><i class="fa fa-facebook"></i></a>
+                            <a href="{{$data['link']->tw}}"><i class="fa fa-twitter"></i></a>
+                            <a href="{{$data['link']->ins}}"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>

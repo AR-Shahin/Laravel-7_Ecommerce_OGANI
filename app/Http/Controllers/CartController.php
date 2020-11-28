@@ -8,6 +8,8 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use App\Models\SiteIdentity;
+use App\Models\SocialLink;
 
 class CartController extends Controller
 {
@@ -38,6 +40,8 @@ class CartController extends Controller
 
     public function ViewCart(){
         $data=[];
+        $data['site'] = SiteIdentity::get()->first();
+        $data['link'] = SocialLink::get()->first();
         $data['subTotal'] = Cart::all()->where('user_ip',request()->ip())->sum(function($sum){
             return $sum->price* $sum->qty;
         });
