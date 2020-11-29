@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('ars', function () {
-    return view('backend.admin.login');
-});
 
 //Client Routes
-Route::get('/','ClientController@index')->name('home');
+Route::get('/','ClientController@index')->name('home_page');
 Route::get('/shop','ClientController@shop')->name('shop');
 Route::get('/single_product/{slug}','ClientController@singleProduct')->name('singleProduct');
 Route::get('/checkout','ClientController@checkout')->name('checkout');
@@ -39,7 +36,8 @@ Route::get('e-admin','backend\AdminController@login')->name('e-admin');
 Route::get('e-registraion','backend\AdminController@registraion')->name('e-registraion');
 Route::post('admin.store','backend\AdminController@store');
 Route::post('admin.login','backend\AdminController@LoginProcess');
-Route::get('admin.logout','backend\AdminController@logout')->middleware('auth');
+Route::get('admin.logout','backend\AdminController@logout')->middleware('auth')->name('logOut');
+Route::get('logout','backend\AdminController@logout_cus')->middleware('auth')->name('logOut_cus');
 
 //Category Routes
 Route::get('categories','backend\CategoryController@index')->name('categories.index');
@@ -100,11 +98,41 @@ Route::prefix('social-link')->group(function (){
 });
 
 //Customer Routes
-Route::get('customer.login','CustomerController@loginPage');
-Route::get('customer.registration','CustomerController@regPage');
-Route::post('customer.store','CustomerController@store');
-Route::post('customer.login','CustomerController@Login');
-Route::get('customer.home','CustomerController@index');
+Route::get('customer.login','CustomerController@loginPage')->name('cus.log');
+Route::get('customer.registration','CustomerController@regPage')->name('cus.reg');
+Route::post('customer.store','CustomerController@store')->name('cus.log.store');
+Route::post('customer.login','CustomerController@Login')->name('cus.log');
+Route::get('customer/home','CustomerController@index')->name('cus/home')->middleware('auth');
 
 
 
+
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout')->name('ssl');
+Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout')->name('host_ssl');
+
+Route::post('/pay', 'SslCommerzPaymentController@index');
+Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+
+Route::post('/success', 'SslCommerzPaymentController@success');
+Route::post('/fail', 'SslCommerzPaymentController@fail');
+Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+// SSLCOMMERZ Start
+//Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+//Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+//
+//Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+//Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+//
+//Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+//Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+//Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+//
+//Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END

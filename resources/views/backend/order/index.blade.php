@@ -27,6 +27,7 @@
           <thead>
             <tr>
               <th class="wd-15p">SL</th>
+              <th class="wd-15p">Customer</th>
               <th class="wd-15p">Product name</th>
               <th class="wd-15p">Qtuantity</th>
               <th class="wd-20p">Price</th>
@@ -42,6 +43,7 @@
               @foreach($data['orders'] as $order)
               <tr>
                 <td>{{ $i++ }}</td>
+                <td>{{ $order->admin->name }}</td>
                 <td>{{ $order->product->product_name }}</td>
                 <td>{{ $order->qty }}</td>
                 <td>{{ $order->product->price  }}</td>

@@ -24,35 +24,46 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    @include('includes.humberger')
-    <!-- Humberger End -->
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+@include('includes.humberger')
+<!-- Humberger End -->
 
-    <!-- Header Section Begin -->
- @include('includes.navbar')
-    <!-- Header Section End -->
+<!-- Header Section Begin -->
+@include('includes.navbar')
+<!-- Header Section End -->
 
-   @yield('main_content')
+@yield('main_content')
 
 
 @include('includes/footer')
-    <!-- Footer Section End -->
+<!-- Footer Section End -->
 
-    <!-- Js Plugins -->
-    <script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
-    <script src="{{ asset('frontend') }}/js/bootstrap.min.js"></script>
-    <script src="{{ asset('frontend') }}/js/jquery.nice-select.min.js"></script>
-    <script src="{{ asset('frontend') }}/js/jquery-ui.min.js"></script>
-    <script src="{{ asset('frontend') }}/js/jquery.slicknav.js"></script>
-    <script src="{{ asset('frontend') }}/js/mixitup.min.js"></script>
-    <script src="{{ asset('frontend') }}/js/owl.carousel.min.js"></script>
-    <script src="{{ asset('frontend') }}/js/main.js"></script>
+<!-- Js Plugins -->
+<script src="{{ asset('frontend') }}/js/jquery-3.3.1.min.js"></script>
+<script src="{{ asset('frontend') }}/js/bootstrap.min.js"></script>
+<script src="{{ asset('frontend') }}/js/jquery.nice-select.min.js"></script>
+<script src="{{ asset('frontend') }}/js/jquery-ui.min.js"></script>
+<script src="{{ asset('frontend') }}/js/jquery.slicknav.js"></script>
+<script src="{{ asset('frontend') }}/js/mixitup.min.js"></script>
+<script src="{{ asset('frontend') }}/js/owl.carousel.min.js"></script>
+<script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+            tag.parentNode.insertBefore(script, tag);
+        };
+
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+<script src="{{ asset('frontend') }}/js/main.js"></script>
 
 
 

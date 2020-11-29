@@ -15,11 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->ipAddress('user_ip');
-            $table->integer('product_id');
-            $table->integer('qty');
-            $table->float('price');
-            $table->string('coupon_name')->nullable();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->double('amount')->nullable();
+            $table->string('address')->nullable();
+            $table->string('status')->nullable();
+            $table->integer('conditions')->default(0);
+            $table->string('transaction_id')->nullable();
+            $table->string('currency')->nullable();
             $table->timestamps();
         });
     }

@@ -55,6 +55,7 @@ class ClientController extends Controller
                                 ->paginate(12);
         $data['site'] = SiteIdentity::get()->first();
         $data['link'] = SocialLink::get()->first();
+        $data['count'] = Product::where('status',1)->get()->count();
         return view('frontend.shop',compact('data'));
     }
     public function singleProduct($slug){
