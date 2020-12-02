@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderItem;
+use function emptyArray;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Models\Cart;
-use App\Order;
+use App\Models\Order;
 
 use App\Models\SiteIdentity;
 use App\Models\SocialLink;
 use Illuminate\Support\Facades\Auth;
+use function redirect;
+use function view;
 
 class OrderController extends Controller
 {
@@ -92,6 +95,20 @@ class OrderController extends Controller
         if($update){
             return redirect()->back()->with('success','Trashed Order!');
         }
+    }
+
+
+    //backend
+    public function billingInformationBackend(){
+        $this->data['bliings'] = Order::orderBy('id','desc')->get();
+        return view('backend.order.billing',$this->data);
+    }
+
+    public function billingOrderBackend($id)
+    {
+        $this->data['items'] = OrderItem::with('product')->where('trans_id',$id)->latest()->get();
+
+        return view('backend.order.billingOrder',$this->data);
     }
 
 }

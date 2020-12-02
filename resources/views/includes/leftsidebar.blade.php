@@ -34,7 +34,7 @@
                 <span class="menu-item-label">Brands</span>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link {{ request()->is('products') ? 'active' : '' }} {{ request()->is('products') ? 'show-sub' : '' }} {{ request()->is('products/create') ? 'active' : '' }}">
+        <a href="#" class="sl-menu-link {{ request()->is('products') ? 'active' : '' }} {{ request()->is('products') ? 'active' : '' }} {{ request()->is('products') ? 'show-sub' : '' }} {{ request()->is('products/create') ? 'active' : '' }}">
             <div class="sl-menu-item">
                 <i class="menu-item-icon fa fa-cube tx-20"></i>
                 <span class="menu-item-label">Products</span>
@@ -50,18 +50,21 @@
                 <span class="menu-item-label">Coupons</span>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link {{ request()->is('manageorder.index') ? 'active' : '' }}">
+        <a href="#" class="sl-menu-link {{ request()->is('manageorder.index') ? 'active' : '' }} {{ request()->is('billing-info') ? 'active' : '' }}">
             <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+                <i class="menu-item-icon icon fa fa-table tx-24"></i>
                 <span class="menu-item-label">Orders</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ url('manageorder.index')}}" class="nav-link">Manage Order</a></li>
+            <li class="nav-item "><a href="{{ url('manageorder.index')}}" class="nav-link show">Manage Order</a></li>
+            <li class="nav-item"><a href="{{ route('billing.info')}}" class="nav-link">Billing Information</a></li>
         </ul>
+
+
         {{--slider--}}
-        <a href="#" class="sl-menu-link ">
+        <a href="#" class="sl-menu-link {{ request()->is('slider/index') ? 'active' : '' }}">
             <div class="sl-menu-item">
                 <i class="menu-item-icon fa fa-sliders tx-24"></i>
                 <span class="menu-item-label">Sliders</span>
@@ -81,10 +84,30 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ route('site.identity')  }}" class="nav-link">Logo & Footer</a></li>
+            <li class="nav-item {{ request()->is('site.identity') ? 'active' : '' }}"><a href="{{ route('site.identity')  }}" class="nav-link">Logo & Footer</a></li>
             <li class="nav-item"><a href="{{ route('social.index')}}" class="nav-link">Social Links</a></li>
         </ul>
 
+        <a href="{{ route('back.cus') }}" class="sl-menu-link {{ request()->is('customer/all') ? 'active' : '' }}">
+            <div class="sl-menu-item">
+                <i class="menu-item-icon icon fa fa-users tx-20"></i>
+                <span class="menu-item-label">Customers</span>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+
+        <a href="{{ route('view.admin') }}" class="sl-menu-link {{ request()->is('view/admin') ? 'active' : '' }} {{ request()->is('e-registraion') ? 'active' : '' }}">
+            <div class="sl-menu-item">
+                <i class="menu-item-icon icon fa fa-users tx-20"></i>
+                <span class="menu-item-label">Admins</span>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+
+        <a href="{{ route('view.profile') }}" class="sl-menu-link {{ request()->is('admin/update') ? 'active' : '' }} {{ request()->is('view/profile') ? 'active' : '' }}">
+            <div class="sl-menu-item">
+                <i class="menu-item-icon icon fa fa-user tx-20"></i>
+                <span class="menu-item-label">View Profile</span>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
     </div><!-- sl-sideleft-menu -->
 
     <br>

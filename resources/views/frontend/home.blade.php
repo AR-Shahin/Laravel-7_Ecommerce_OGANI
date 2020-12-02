@@ -22,15 +22,14 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
+                            <form action="{{route('search.product')}}" method="post">
+                                @csrf
+                                <input id="search" type="text" placeholder="What do yo u need?" required name="name">{{ csrf_field() }}
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
+                            <span id="suggestTxt"></span>
                         </div>
+
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -44,15 +43,15 @@
 
                     <div class="slider hero_slider owl-carousel ">
                         @foreach($data['sliders'] as $slider)
-                        <div class="hero__item set-bg" data-setbg="{{ asset($slider->image) }}">
-                            <div class="hero__text p-4" style="background-color:rgba(242, 241, 242,.8)">
-                                <span>{{$slider->text_1}}</span>
-                                <h2>{{$slider->text_2}}</h2>
-                                <h2>{{$slider->text_3}}</h2>
-                                <p class="text-waring">{{$slider->text_4}}</p>
-                                <a href="{{ url('shop')}}" class="primary-btn">SHOP NOW</a>
+                            <div class="hero__item set-bg" data-setbg="{{ asset($slider->image) }}">
+                                <div class="hero__text p-4" style="background-color:rgba(242, 241, 242,.8)">
+                                    <span>{{$slider->text_1}}</span>
+                                    <h2>{{$slider->text_2}}</h2>
+                                    <h2>{{$slider->text_3}}</h2>
+                                    <p class="text-waring">{{$slider->text_4}}</p>
+                                    <a href="{{ url('shop')}}" class="primary-btn">SHOP NOW</a>
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>

@@ -33,13 +33,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="{{ route('home_page') }}"><img src="{{ asset($data['site']->logo) }}" alt=""></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset($data['site']->logo) }}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route('home_page') }}">Home</a></li>
+                        <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
                         <li class="{{ request()->is('shop') ? 'active' : '' }}" ><a href="{{ route('shop') }}">Shop</a></li>
 
                         @if(@Auth::check() && Auth::user()->userTye == 'customer')

@@ -36,6 +36,10 @@
                                                 <td>Email</td>
                                                 <td>{{Auth::user()->email}}</td>
                                             </tr>
+                                            <tr>
+                                                <td>Added Date</td>
+                                                <td>{{Auth::user()->created_at->diffForHumans()}}</td>
+                                            </tr>
                                         </table>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-messages-tab">
@@ -71,7 +75,7 @@
                                                             <span class="badge badge-info">Pending</span>
                                                         @elseif($order->status == 1)
                                                             <span class="badge badge-warning">Shifting</span>
-                                                            <a href="" class="btn btn-danger btn-sm">Received</a>
+                                                            <a href="{{ url('trashdOrder').'/'.$order->id }}" class="badge-danger badge btn-sm">Delete</a>
                                                         @else
                                                             <span class="badge badge-link">N/A</span>
                                                         @endif

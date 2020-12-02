@@ -21,6 +21,9 @@ Route::get('/single_product/{slug}','ClientController@singleProduct')->name('sin
 Route::get('/checkout','ClientController@checkout')->name('checkout');
 Route::get('/category.product/{catName}','ClientController@catWiseProduct')->name('category.product');
 
+Route::post('search/product','ClientController@searchProductFromHome')->name('search.product');
+
+
 //Carts Routes
 Route::post('addToCart/{id}','CartController@addToCart');
 Route::get('/cart','CartController@ViewCart')->name('cart');
@@ -104,14 +107,25 @@ Route::post('customer.store','CustomerController@store')->name('cus.log.store');
 Route::post('customer.login','CustomerController@Login')->name('cus.log');
 Route::get('customer/home','CustomerController@index')->name('cus/home')->middleware('auth');
 
-
-
-
 //Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'ClientController@index')->name('home');
 
 
+//new Route for order and bill
+Route::get('customer/all','CustomerController@allCustomersBackend')->name('back.cus')->middleware('auth');
+Route::get('billing-info','OrderController@billingInformationBackend')->name('billing.info')->middleware('auth');
+Route::get('billing-order/{id}','OrderController@billingOrderBackend')->name('billing.oder')->middleware('auth');
+
+Route::get('view/admin','backend\AdminController@allAdminsBackend')->name('view.admin')->middleware('auth');
+Route::get('view/profile','backend\AdminController@viewProfile')->name('view.profile')->middleware('auth');
+Route::get('admin/update','backend\AdminController@updateProfile')->name('admin.update')->middleware('auth');
+Route::post('admin/update','backend\AdminController@updateProfileAdmin')->name('admin.update')->middleware('auth');
+Route::post('admin/change/password','backend\AdminController@changePassword')->name('admin.change.password')->middleware('auth');
+Route::get('admin/delete/{id}','backend\AdminController@deleteAdmin')->name('admin.delete')->middleware('auth');
+
+
+//payment Method
 Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout')->name('ssl');
 Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout')->name('host_ssl');
 
@@ -136,3 +150,4 @@ Route::post('/cancel', 'SslCommerzPaymentController@cancel');
 //
 //Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
+

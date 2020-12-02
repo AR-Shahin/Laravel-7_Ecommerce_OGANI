@@ -26,13 +26,13 @@ class CustomerController extends Controller
         $data= [];
         $data['site'] = SiteIdentity::get()->first();
         $data['link'] = SocialLink::get()->first();
-        return view('frontend\customer\loginpage',compact('data'));
+        return view('frontend.customer.loginpage',compact('data'));
     }
     public function regPage(){
         $data= [];
         $data['site'] = SiteIdentity::get()->first();
         $data['link'] = SocialLink::get()->first();
-        return view('frontend\customer\registration',compact('data'));
+        return view('frontend.customer.registration',compact('data'));
     }
 
     public function store(Request $request){
@@ -85,7 +85,15 @@ class CustomerController extends Controller
         $data['site'] = SiteIdentity::get()->first();
         $data['link'] = SocialLink::get()->first();
         $data['orderItms'] = OrderItem::where('admin_id',Auth::user()->id)
-            ->where('status','!=',4)->get();
+            ->where('status','!=',4)->latest()->get();
         return view('frontend.customer.home',compact('data'));
+    }
+
+
+    //backend
+
+    public function allCustomersBackend(){
+        $this->data['customers'] = Admin::where('userTye','customer')->latest()->get();
+        return view('backend.customer.index',$this->data);
     }
 }

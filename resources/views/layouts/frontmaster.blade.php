@@ -64,6 +64,7 @@
     })(window, document);
 </script>
 <script src="{{ asset('frontend') }}/js/main.js"></script>
+<script src="{{ asset('frontend') }}/js/custom.js"></script>
 
 
 

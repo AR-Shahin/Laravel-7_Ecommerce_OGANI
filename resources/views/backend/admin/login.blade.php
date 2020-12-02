@@ -16,7 +16,7 @@
           </div><!-- d-flex -->
         </div>
         @endif
-        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">shaHin <span class="tx-info tx-normal">admin</span></div>
+        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">Admin <span class="tx-info tx-normal">Panel</span></div>
         <div class="tx-center mg-b-60">Professional Admin Template Design</div>
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -38,7 +38,6 @@
         </div><!-- form-group -->
         <button type="submit" class="btn btn-info btn-block">Sign In</button>
 
-        <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ url('e-registraion') }}" class="tx-info">Sign Up</a></div>
       </div><!-- login-wrapper -->
   </form>
     </div>
