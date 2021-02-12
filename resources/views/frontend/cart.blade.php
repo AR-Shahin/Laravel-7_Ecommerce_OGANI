@@ -151,24 +151,28 @@
 
     <!-- Shoping Cart Section End -->
 
-    <script>
-        //        console.log(price);
-        //        console.log(typeof price);
-         var qty = document.getElementById('cart_quantity');
-        qty.addEventListener('change',function () {
-            var quantity = Number(this.value);
-            //console.log(typeof quantity);
-            var price = document.getElementById('cart_price').innerText;
-            price = Number(price);
-            var total = price * quantity;
-            document.getElementById('cart_total').innerText = total;
-        })
-    </script>
+    {{--<script>--}}
+        {{--//        console.log(price);--}}
+        {{--//        console.log(typeof price);--}}
+         {{--var qty = document.getElementById('cart_quantity');--}}
+        {{--qty.addEventListener('change',function () {--}}
+            {{--var quantity = Number(this.value);--}}
+            {{--//console.log(typeof quantity);--}}
+            {{--var price = document.getElementById('cart_price').innerText;--}}
+            {{--price = Number(price);--}}
+            {{--var total = price * quantity;--}}
+            {{--document.getElementById('cart_total').innerText = total;--}}
+        {{--})--}}
+    {{--</script>--}}
 @endsection
 
 @push('script')
 <script>
-
+    $('.cartQuantity').on('change',function () {
+        var qty =  $(this).val();
+        var price = $(this).closest('tr').find('#cart_price').text();
+        $(this).closest('tr').find('#cart_total').text(Number(qty) * Number(price));
+    })
 </script>
 @endpush
 
