@@ -57,14 +57,15 @@
                                             <h5>{{ ucwords($cart->product_name)}}</h5>
                                         </td>
                                         <td class="shoping__cart__price">
-                                            ${{ $cart->price}}
+                                            {{--$ <input type="number" readonly value="{{ $cart->price}}" id="cart_price">--}}
+                                            $ <span id="cart_price" class="price">{{ $cart->price}}</span>
                                         </td>
                                         <td class="shoping__cart__quantity">
                                             <form method ="post" action ="cart/update/{{ $cart->id}}">
                                                 @csrf
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input type="text" value="{{ $cart->qty}}" name ="qty">
+                                                        <input type="number" id="cart_quantity" value="{{ $cart->qty}}" name ="qty" min="1" class="cartQuantity">
                                                     </div>
                                                     <button class="btn  btn-info" style="display:inline-block">Update</button>
                                             </form>
@@ -72,7 +73,8 @@
 
                         </td>
                         <td class="shoping__cart__total">
-                            ${{ $cart->qty*$cart->price }}
+                            $ <span id="cart_total">{{ $cart->qty*$cart->price }}</span>
+                            {{--<input type="text" id="cart_total" value="{{ $cart->qty*$cart->price }}">--}}
                         </td>
                         <td class="shoping__cart__item__close">
                             <a href ="cart/delete/{{ $cart->id}}" onclick="return confirm('Are you sure ?')">
@@ -149,6 +151,24 @@
 
     <!-- Shoping Cart Section End -->
 
-
+    <script>
+        //        console.log(price);
+        //        console.log(typeof price);
+         var qty = document.getElementById('cart_quantity');
+        qty.addEventListener('change',function () {
+            var quantity = Number(this.value);
+            //console.log(typeof quantity);
+            var price = document.getElementById('cart_price').innerText;
+            price = Number(price);
+            var total = price * quantity;
+            document.getElementById('cart_total').innerText = total;
+        })
+    </script>
 @endsection
+
+@push('script')
+<script>
+
+</script>
+@endpush
 

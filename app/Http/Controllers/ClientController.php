@@ -49,7 +49,7 @@ class ClientController extends Controller
     public function shop(){
         $data = [];
         $data['cats'] = Category::orderBy('id','desc')->get();
-        $data['products_slider'] = Product::where('status',1)
+       $data['products_slider'] = Product::where('status',1)
             ->orderBy('id', 'asc')
             ->get();
         $data['products'] = Product::where('status',1)
