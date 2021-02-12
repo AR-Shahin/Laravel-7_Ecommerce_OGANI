@@ -87,6 +87,12 @@
                     </div>
                 </div>
             </div>
+
+            <style>
+                .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty .qtybtn {
+                    display: none;
+                }
+            </style>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
@@ -172,6 +178,7 @@
         var qty =  $(this).val();
         var price = $(this).closest('tr').find('#cart_price').text();
         $(this).closest('tr').find('#cart_total').text(Number(qty) * Number(price));
+        console.log('ok');
     })
 </script>
 @endpush

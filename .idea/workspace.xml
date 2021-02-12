@@ -13,7 +13,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.49840763">
+    <splitter split-orientation="vertical" split-proportion="0.9">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
@@ -39,8 +39,8 @@
           <file leaf-file-name="cart.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/resources/views/frontend/cart.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="87">
-                  <caret line="75" column="50" lean-forward="false" selection-start-line="75" selection-start-column="40" selection-end-line="75" selection-end-column="50" />
+                <state relative-caret-position="360">
+                  <caret line="91" column="98" lean-forward="false" selection-start-line="91" selection-start-column="98" selection-end-line="91" selection-end-column="98" />
                   <folding />
                 </state>
               </provider>
@@ -53,8 +53,8 @@
           <file leaf-file-name="cart.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/resources/views/frontend/cart.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-414">
-                  <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="165" selection-end-column="17" />
+                <state relative-caret-position="174">
+                  <caret line="180" column="26" lean-forward="false" selection-start-line="180" selection-start-column="26" selection-end-line="180" selection-end-column="26" />
                   <folding />
                 </state>
               </provider>
@@ -400,15 +400,15 @@
       <workItem from="1606975133709" duration="125000" />
       <workItem from="1607519896361" duration="1239000" />
       <workItem from="1610430219162" duration="2631000" />
-      <workItem from="1613128147421" duration="6728000" />
+      <workItem from="1613128147421" duration="6879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87127000" />
+    <option name="totallyTimeSpent" value="87278000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1481763" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -795,8 +795,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/frontend/cart.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="165" selection-end-column="17" />
+        <state relative-caret-position="360">
+          <caret line="91" column="98" lean-forward="false" selection-start-line="91" selection-start-column="98" selection-end-line="91" selection-end-column="98" />
           <folding />
         </state>
       </provider>
