@@ -66,7 +66,8 @@ class ProductController extends Controller
         $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $uploads = 'images/product/';
         $last_img = $uploads . $name_gen;
-        Image::make($image)->resize(270,270)->save($last_img);
+        //Image::make($image)->resize(270,270)->save($last_img);
+        $image->move(public_path('images/product/'), $last_img);
         $product = new Product();
         $product->product_name = $request->product_name;
         $product->cat_id = $request->cat_id;
@@ -86,7 +87,8 @@ class ProductController extends Controller
                 $name_gen = hexdec(uniqid()) . '.' . $single_img->getClientOriginalExtension();
                 $uploads = 'images/sliders/';
                 $last_img = $uploads . $name_gen;
-                Image::make($single_img)->resize(270,270)->save($last_img);
+                // Image::make($single_img)->resize(270,270)->save($last_img);
+                $single_img->move(public_path('images/sliders/'), $last_img);
                 $sImg = new SliderImage();
                 $sImg->product_id = $id ;
                 $sImg->images = $last_img ;
@@ -156,7 +158,8 @@ class ProductController extends Controller
             $name_gen = hexdec(uniqid()) . '.' . $main_image->getClientOriginalExtension();
             $uploads = 'images/product/';
             $last_img = $uploads . $name_gen;
-            Image::make($main_image)->resize(270,270)->save($last_img);
+            //Image::make($main_image)->resize(270,270)->save($last_img);
+            $main_image->move(public_path('images/product/'), $last_img);
             $up = Product::find($id);
             $up->product_name = $request->product_name;
             $up->cat_id = $request->cat_id;
@@ -182,7 +185,8 @@ class ProductController extends Controller
                     $name_gen = hexdec(uniqid()) . '.' . $single_img->getClientOriginalExtension();
                     $uploads = 'images/sliders/';
                     $last_img = $uploads . $name_gen;
-                    Image::make($single_img)->resize(270,270)->save($last_img);
+                    //Image::make($single_img)->resize(270,270)->save($last_img);
+                    $single_img->move(public_path('images/sliders/'), $last_img);
                     $sImg = new SliderImage();
                     $sImg->product_id = $id ;
                     $sImg->images = $last_img ;
@@ -195,7 +199,8 @@ class ProductController extends Controller
             $name_gen = hexdec(uniqid()) . '.' . $main_image->getClientOriginalExtension();
             $uploads = 'images/product/';
             $last_img = $uploads . $name_gen;
-            Image::make($main_image)->resize(270,270)->save($last_img);
+            // Image::make($main_image)->resize(270,270)->save($last_img);
+            $main_image->move(public_path('images/product/'), $last_img);
             $up = Product::find($id);
             $up->product_name = $request->product_name;
             $up->cat_id = $request->cat_id;
@@ -209,7 +214,7 @@ class ProductController extends Controller
             $up->slug =  Str::slug($request->product_name, '-');
             if($up->save()){
                 unlink($old_img);
-                return redirect('products')->with('update','Product Updated Successfully!'); 
+                return redirect('products')->with('update','Product Updated Successfully!');
             }
         }else if($slider_images){
             $up = Product::find($id);
@@ -234,7 +239,8 @@ class ProductController extends Controller
                     $name_gen = hexdec(uniqid()) . '.' . $single_img->getClientOriginalExtension();
                     $uploads = 'images/sliders/';
                     $last_img = $uploads . $name_gen;
-                    Image::make($single_img)->resize(270,270)->save($last_img);
+                    //Image::make($single_img)->resize(270,270)->save($last_img);
+                    $single_img->move(public_path('images/sliders/'), $last_img);
                     $sImg = new SliderImage();
                     $sImg->product_id = $id ;
                     $sImg->images = $last_img ;

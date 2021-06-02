@@ -34,7 +34,8 @@ class SliderController extends Controller
         $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $uploads = 'images/hero/';
         $last_img = $uploads . $name_gen;
-        Image::make($image)->resize(1040,840)->save($last_img);
+        //Image::make($image)->resize(1040,840)->save($last_img);
+        $image->move(public_path('images/hero/'), $last_img);
         $insert = Slider::insert([
             "text_1" => ucwords($request->input('txt_1')),
             "text_2" => ucwords($request->input('txt_2')),
@@ -62,8 +63,8 @@ class SliderController extends Controller
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             $uploads = 'images/hero/';
             $last_img = $uploads . $name_gen;
-            Image::make($image)->resize(1040,840)->save($last_img);
-
+            //Image::make($image)->resize(1040,840)->save($last_img);
+            $image->move(public_path('images/hero/'), $last_img);
             $update =Slider::findorFail($id)->update([
                 "text_1" => ucwords($request->input('text_1')),
                 "text_2" => ucwords($request->input('text_2')),

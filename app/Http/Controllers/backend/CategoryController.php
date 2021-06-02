@@ -40,7 +40,8 @@ class CategoryController extends Controller
         $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $uploads = 'images/category/';
         $last_img = $uploads . $name_gen;
-        Image::make($image)->resize(270,270)->save($last_img);
+        // Image::make($image)->resize(270,270)->save($last_img);
+        $image->move(public_path('images/category/'), $last_img);
         $insert = Category::insert([
         "cat_name" => $request->input('cat_name'),
          "cat_img" => $last_img,
@@ -50,7 +51,7 @@ class CategoryController extends Controller
            return Redirect()->back()->with("insert",'Category Added Successfully!!');
         }
     }
-  
+
     public function update(Request $request, $id)
     {
 
@@ -60,8 +61,8 @@ class CategoryController extends Controller
                 $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
                 $uploads = 'images/category/';
                 $last_img = $uploads . $name_gen;
-                Image::make($image)->resize(270,270)->save($last_img);
-                
+            // Image::make($image)->resize(270,270)->save($last_img);
+            $image->move(public_path('images/category/'), $last_img);
                 $update =Category::findorFail($id)->update([
                     "cat_name" => $request->cat_name,
                     "cat_img" => $last_img,
@@ -69,18 +70,18 @@ class CategoryController extends Controller
                     ]);
                     if($update){
                         unlink($old_img);
-                        return Redirect()->back()->with("update",'Category Updated Successfully!!'); 
+                        return Redirect()->back()->with("update",'Category Updated Successfully!!');
                     }
             }else{
             $update =Category::findorFail($id)->update([
             "cat_name" => $request->cat_name,
                 'updated_at' => Carbon::now()
-            ]);  
+            ]);
             if($update){
-                return Redirect()->back()->with("update",'Category Updated Successfully!!'); 
+                return Redirect()->back()->with("update",'Category Updated Successfully!!');
             }
         }
-      
+
     }
 
     /**
