@@ -66,7 +66,8 @@ class AdminController extends Controller
         $admin->password = Hash::make($request->password);
 
         if($admin->save()){
-            Image::make($image)->resize(270,270)->save($last_img);
+            //Image::make($image)->resize(270,270)->save($last_img);
+            $image->move(public_path('images/admin/'), $last_img);
             return redirect()->route('view.admin')->with('insert','New Admin Added Successfully!');
         }
     }

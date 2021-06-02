@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use const true;
+
 
 class ChangePassword extends FormRequest
 {
